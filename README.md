@@ -15,7 +15,7 @@ python -m wioming_onnxasr --model gigaam-v2-ctc --uri 'tcp://0.0.0.0:10305' --qu
 
 ### Доступные модели:
 ```
-gigaam-v2-ctc
+gigaam-v2-ctc    # это база
 gigaam-v2-rnnt
 nemo-fastconformer-ru-ctc
 nemo-fastconformer-ru-rnnt
