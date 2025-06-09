@@ -15,7 +15,7 @@ python -m wioming_onnxasr --model gigaam-v2-ctc --uri 'tcp://0.0.0.0:10305' --qu
 
 ### Доступные модели:
 ```
-gigaam-v2-ctc    # это база
+gigaam-v2-ctc    # это база, int8 - 240 мб, full - 900мб
 gigaam-v2-rnnt
 nemo-fastconformer-ru-ctc
 nemo-fastconformer-ru-rnnt
@@ -23,7 +23,7 @@ nemo-parakeet-ctc-0.6b
 nemo-parakeet-rnnt-0.6b
 nemo-parakeet-tdt-0.6b-v2
 whisper-base
-alphacep/vosk-model-ru
+alphacep/vosk-model-ru    # int - 70мб, full - 260мб, ещё быстрее но WER хуже
 alphacep/vosk-model-small-ru
 onnx-community/whisper-tiny
 onnx-community/whisper-base
