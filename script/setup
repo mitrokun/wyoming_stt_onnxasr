@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+import argparse
+import subprocess
+import venv
+from pathlib import Path
+
+# Определяем пути
+_DIR = Path(__file__).parent
+_PROGRAM_DIR = _DIR.parent
+_VENV_DIR = _PROGRAM_DIR / ".venv"
+
+# Парсим аргументы командной строки
+parser = argparse.ArgumentParser(description="Set up virtual environment and install dependencies for wyoming_stt_onnxasr")
+parser.add_argument("--dev", action="store_true", help="Install dev requirements")
+args = parser.parse_args()
+
+# Создаём виртуальное окружение
+builder = venv.EnvBuilder(with_pip=True)
+context = builder.ensure_directories(_VENV_DIR)
+builder.create(_VENV_DIR)
+
+# Обновляем pip и базовые пакеты
+pip = [context.env_exe, "-m", "pip"]
+subprocess.check_call(pip + ["install", "--upgrade", "pip"])
+subprocess.check_call(pip + ["install", "--upgrade", "setuptools", "wheel"])
+
+# Устанавливаем зависимости из requirements.txt
+requirements_file = _PROGRAM_DIR / "requirements.txt"
+if requirements_file.exists():
+    subprocess.check_call(pip + ["install", "-r", str(requirements_file)])
+else:
+    print(f"Error: {requirements_file} not found")
+    exit(1)
+
+# Устанавливаем dev-зависимости, если указан флаг --dev
+if args.dev:
+    dev_requirements_file = _PROGRAM_DIR / "requirements_dev.txt"
+    if dev_requirements_file.exists():
+        subprocess.check_call(pip + ["install", "-r", str(dev_requirements_file)])
+    else:
+        print(f"Warning: {dev_requirements_file} not found, skipping dev requirements")

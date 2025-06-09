@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+import subprocess
+import sys
+from pathlib import Path
+import venv
+
+# Определяем пути
+_DIR = Path(__file__).parent
+_PROGRAM_DIR = _DIR.parent
+_VENV_DIR = _PROGRAM_DIR / ".venv"
+
+# Проверяем существование виртуального окружения
+context = venv.EnvBuilder().ensure_directories(_VENV_DIR)
+if not (_VENV_DIR / "pyvenv.cfg").exists():
+    print(f"Error: Virtual environment not found at {_VENV_DIR}. Please run install.py first.")
+    exit(1)
+
+# Запускаем wyoming_onnxasr с указанными параметрами
+command = [
+    context.env_exe,
+    "-m", "wyoming_onnxasr",
+    "--model", "gigaam-v2-ctc",
+    "--uri", "tcp://0.0.0.0:10305",
+    "--quantization", "int8"
+]
+
+# Добавляем дополнительные аргументы, если переданы
+command += sys.argv[1:]
+
+try:
+    subprocess.check_call(command)
+except subprocess.CalledProcessError as e:
+    print(f"Error running wyoming_onnxasr: {e}")
+    exit(1)

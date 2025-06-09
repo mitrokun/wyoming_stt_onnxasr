@@ -1,0 +1,2 @@
+onnx-asr[cpu,hub]
+wyoming
