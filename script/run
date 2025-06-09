@@ -20,8 +20,7 @@ command = [
     context.env_exe,
     "-m", "wyoming_onnxasr",
     "--model", "gigaam-v2-ctc",
-    "--uri", "tcp://0.0.0.0:10305",
-    "--quantization", "int8"
+    "--uri", "tcp://0.0.0.0:10305"
 ]
 
 # Добавляем дополнительные аргументы, если переданы
