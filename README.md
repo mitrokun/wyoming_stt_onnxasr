@@ -30,7 +30,7 @@ nemo-parakeet-rnnt-0.6b
 nemo-parakeet-tdt-0.6b-v2
 whisper-base
 alphacep/vosk-model-ru        # int - 70мб, full - 260мб, ещё быстрее но WER хуже
-alphacep/vosk-model-small-ru  # 25мб/90мб
+alphacep/vosk-model-small-ru  # 25мб/90мб, в аддоне HA исользуется v0.22, здесь v0.52
 onnx-community/whisper-tiny
 onnx-community/whisper-base
 onnx-community/whisper-small
