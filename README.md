@@ -21,7 +21,7 @@ script/setup
 
 ### Доступные модели:
 ```
-gigaam-v2-ctc    # это база, int8 - 240 мб, full - 900мб
+gigaam-v2-ctc                # это база, int8 - 240 мб, full - 900мб
 gigaam-v2-rnnt
 nemo-fastconformer-ru-ctc
 nemo-fastconformer-ru-rnnt
