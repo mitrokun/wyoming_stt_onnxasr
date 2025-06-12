@@ -25,11 +25,11 @@ gigaam-v2-ctc                # это база, int8 - 240 мб, full - 900мб
 gigaam-v2-rnnt
 nemo-fastconformer-ru-ctc
 nemo-fastconformer-ru-rnnt
-nemo-parakeet-ctc-0.6b
+nemo-parakeet-ctc-0.6b        # eng / int8 - 620мб
 nemo-parakeet-rnnt-0.6b
 nemo-parakeet-tdt-0.6b-v2
 whisper-base
-alphacep/vosk-model-ru        # int - 70мб, full - 260мб, ещё быстрее но WER хуже
+alphacep/vosk-model-ru        # int8 - 70мб, full - 260мб, ещё быстрее но WER хуже
 alphacep/vosk-model-small-ru  # 25мб/90мб, в аддоне HA исользуется v0.22, здесь v0.52
 onnx-community/whisper-tiny
 onnx-community/whisper-base
