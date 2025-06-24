@@ -11,7 +11,7 @@ python -m wyoming_onnxasr --model gigaam-v2-ctc --uri 'tcp://0.0.0.0:10305' --qu
 
 # Если установлен onnxruntime-gpu, то используйте --device cuda
 ```
-В linux, как водится, все операции выполняйте в виртуальной среде. Или воспользуйтесь скриптами
+В linux, как водится, все операции выполняйте в виртуальной среде вручную. Или воспользуйтесь скриптами
 ```
 git clone https://github.com/mitrokun/wyoming_stt_onnxasr.git
 cd wyoming_stt_onnxasr
