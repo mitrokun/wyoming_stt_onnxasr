@@ -10,6 +10,7 @@ pip install onnx-asr[cpu,hub] wyoming
 python -m wyoming_onnxasr --model gigaam-v2-ctc --uri 'tcp://0.0.0.0:10305' --quantization int8
 
 # Если установлен onnxruntime-gpu, то используйте --device cuda
+pip install onnxruntime-gpu
 ```
 В linux, как водится, все операции выполняйте в виртуальной среде вручную. Или воспользуйтесь скриптами
 ```
@@ -17,6 +18,8 @@ git clone https://github.com/mitrokun/wyoming_stt_onnxasr.git
 cd wyoming_stt_onnxasr
 script/setup
 # script/run запустит сервер с параметрами из примера выше, но с полной моделью, используйте ключи для конфигурации
+# можно доустановить библиотеку для cuda
+~/wyoming_stt_onnxasr/.venv/bin/pip install onnxruntime-gpu
 ```
 
 ### Доступные модели:
