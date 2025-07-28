@@ -1,4 +1,4 @@
-# Wyoming STT сервер для Home Assistant на базе [ONNX ASR](https://github.com/istupakov/onnx-asr)
+## Wyoming STT сервер для Home Assistant на базе [ONNX ASR](https://github.com/istupakov/onnx-asr)
 ### Нацелен на русскоговорящую аудиторию, из всего многообразия моделей интересны только некоторые
 
 ```
