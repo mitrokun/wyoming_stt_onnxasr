@@ -22,6 +22,7 @@ SUPPORTED_MODELS = [
     "nemo-parakeet-ctc-0.6b",
     "nemo-parakeet-rnnt-0.6b",
     "nemo-parakeet-tdt-0.6b-v2",
+    "nemo-parakeet-tdt-0.6b-v3",
     "whisper-base",
     "alphacep/vosk-model-ru",
     "alphacep/vosk-model-small-ru",
@@ -134,4 +135,5 @@ if __name__ == "__main__":
     try:
         run()
     except KeyboardInterrupt:
+
         pass
