@@ -69,7 +69,7 @@ async def main() -> None:
     )
     _LOGGER.debug(args)
 
-    onnx_asr_version = "0.6.1"  # Фиксированная версия из pip show onnx-asr
+    onnx_asr_version = "0.7.0"  # fix ver from pip show onnx-asr
 
     wyoming_info = Info(
         asr=[
@@ -91,7 +91,7 @@ async def main() -> None:
                             url=f"https://huggingface.co/istupakov/{args.model}",
                         ),
                         installed=True,
-                        languages=["ru", "en"],
+                        languages=["bg", "hr", "cs", "da", "nl", "en", "et", "fi", "fr", "de", "el", "hu", "it", "lv", "lt", "mt", "pl", "pt", "ro", "sk", "sl", "es", "sv", "ru", "uk"],
                         version=args.quantization or "fp32",
                     )
                 ],
@@ -137,3 +137,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
 
         pass
+
