@@ -31,6 +31,7 @@ nemo-fastconformer-ru-rnnt
 nemo-parakeet-ctc-0.6b        # eng / int8 - 620мб
 nemo-parakeet-rnnt-0.6b
 nemo-parakeet-tdt-0.6b-v2
+nemo-parakeet-tdt-0.6b-v3     # мультиязычная модель
 whisper-base                  # комплектные варианты шёпота не интересны, так как есть faster-whisper
 alphacep/vosk-model-ru        # int8 - 70мб, full - 260мб, ещё быстрее но WER хуже
 alphacep/vosk-model-small-ru  # 25мб/90мб, в аддоне HA исользуется v0.22, здесь v0.52
