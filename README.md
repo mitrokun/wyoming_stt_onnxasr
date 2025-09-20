@@ -1,5 +1,6 @@
 ## Wyoming STT сервер для Home Assistant на базе [ONNX ASR](https://github.com/istupakov/onnx-asr)
 ### Нацелен на русскоговорящую аудиторию, из всего многообразия моделей интересны только некоторые
+For English-speaking users, the Parakeet models (e.g., `nemo-parakeet-ctc-0.6b`, `nemo-parakeet-rnnt-0.6b`, `nemo-parakeet-tdt-0.6b-v2`) are recommended.
 
 ```
 # В простом случае достаточно установить зависимости, скачать каталог с сервером и запустить его
@@ -24,14 +25,14 @@ script/setup
 
 ### Доступные модели:
 ```
-gigaam-v2-ctc                # это база, int8 - 240 мб, full - 900мб
+gigaam-v2-ctc                 # это база, int8 - 240 мб, full - 900мб
 gigaam-v2-rnnt
 nemo-fastconformer-ru-ctc
 nemo-fastconformer-ru-rnnt
 nemo-parakeet-ctc-0.6b        # eng / int8 - 620мб
-nemo-parakeet-rnnt-0.6b
-nemo-parakeet-tdt-0.6b-v2
-nemo-parakeet-tdt-0.6b-v3     # мультиязычная модель
+nemo-parakeet-rnnt-0.6b       # eng
+nemo-parakeet-tdt-0.6b-v2     # eng
+nemo-parakeet-tdt-0.6b-v3     # may work inconsistently, as automatic language detection is used for each request
 whisper-base                  # комплектные варианты шёпота не интересны, так как есть faster-whisper
 alphacep/vosk-model-ru        # int8 - 70мб, full - 260мб, ещё быстрее но WER хуже
 alphacep/vosk-model-small-ru  # 25мб/90мб, в аддоне HA исользуется v0.22, здесь v0.52
