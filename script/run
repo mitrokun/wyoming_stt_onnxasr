@@ -19,7 +19,7 @@ if not (_VENV_DIR / "pyvenv.cfg").exists():
 command = [
     context.env_exe,
     "-m", "wyoming_onnxasr",
-    "--model", "gigaam-v2-ctc",
+    "--model", "gigaam-v3-ctc",
     "--uri", "tcp://0.0.0.0:10305"
 ]
 
