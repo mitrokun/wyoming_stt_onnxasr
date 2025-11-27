@@ -14,26 +14,6 @@ from .handler import OnnxAsrEventHandler
 
 _LOGGER = logging.getLogger(__name__)
 
-SUPPORTED_MODELS = [
-    "gigaam-v2-ctc",
-    "gigaam-v2-rnnt",
-    "nemo-fastconformer-ru-ctc",
-    "nemo-fastconformer-ru-rnnt",
-    "nemo-parakeet-ctc-0.6b",
-    "nemo-parakeet-rnnt-0.6b",
-    "nemo-parakeet-tdt-0.6b-v2",
-    "nemo-parakeet-tdt-0.6b-v3",
-    "whisper-base",
-    "alphacep/vosk-model-ru",
-    "alphacep/vosk-model-small-ru",
-    "onnx-community/whisper-tiny",
-    "onnx-community/whisper-base",
-    "onnx-community/whisper-small",
-    "onnx-community/whisper-large-v3-turbo"
-]
-
-DEFAULT_LANGUAGES = ["ru", "en"]
-
 WHISPER_LANGUAGES = [
     "bg", "ca", "cs", "da", "de", "el", "en", "es", "et", "fi", "fr", "he",
     "hi", "hr", "hu", "id", "is", "it", "ja", "ko", "lt", "lv", "my", "nl",
@@ -41,31 +21,55 @@ WHISPER_LANGUAGES = [
     "uk", "ur", "vi", "zh" 
 ]
 
-MODEL_LANGUAGES = {
-    # Multilanguage
+MODELS_RU = [
+    "gigaam-v2-ctc",
+    "gigaam-v2-rnnt",
+    "gigaam-v3-ctc",
+    "gigaam-v3-rnnt",
+    "gigaam-v3-e2e-ctc",
+    "gigaam-v3-e2e-rnnt",
+    "nemo-fastconformer-ru-ctc",
+    "nemo-fastconformer-ru-rnnt",
+    "alphacep/vosk-model-ru",
+    "alphacep/vosk-model-small-ru",
+]
+
+MODELS_EN = [
+    "nemo-parakeet-ctc-0.6b",
+    "nemo-parakeet-rnnt-0.6b",
+    "nemo-parakeet-tdt-0.6b-v2",
+]
+
+MODELS_WHISPER = [
+    "whisper-base",
+    "onnx-community/whisper-tiny",
+    "onnx-community/whisper-base",
+    "onnx-community/whisper-small",
+    "onnx-community/whisper-large-v3-turbo",
+]
+
+MODELS_SPECIAL = {
     "nemo-parakeet-tdt-0.6b-v3": [
         "bg", "hr", "cs", "da", "nl", "en", "et", "fi", "fr", "de", "el", "hu",
         "it", "lv", "lt", "mt", "pl", "pt", "ro", "sk", "sl", "es", "sv", "ru", "uk"
-    ],
-    # EN
-    "nemo-parakeet-ctc-0.6b": ["en"],
-    "nemo-parakeet-rnnt-0.6b": ["en"],
-    "nemo-parakeet-tdt-0.6b-v2": ["en"],
-    # RU
-    "gigaam-v2-ctc": ["ru"],
-    "gigaam-v2-rnnt": ["ru"],
-    "alphacep/vosk-model-ru": ["ru"],
-    "alphacep/vosk-model-small-ru": ["ru"],
-    "nemo-fastconformer-ru-ctc": ["ru"],
-    "nemo-fastconformer-ru-rnnt": ["ru"],
-    # Whisper
-    "whisper-base": WHISPER_LANGUAGES,
-    "onnx-community/whisper-tiny": WHISPER_LANGUAGES,
-    "onnx-community/whisper-base": WHISPER_LANGUAGES,
-    "onnx-community/whisper-small": WHISPER_LANGUAGES,
-    "onnx-community/whisper-large-v3-turbo": WHISPER_LANGUAGES,
+    ]
 }
 
+DEFAULT_LANGUAGES = ["ru", "en"]
+MODEL_LANGUAGES = {}
+
+for model in MODELS_RU:
+    MODEL_LANGUAGES[model] = ["ru"]
+
+for model in MODELS_EN:
+    MODEL_LANGUAGES[model] = ["en"]
+
+for model in MODELS_WHISPER:
+    MODEL_LANGUAGES[model] = WHISPER_LANGUAGES
+
+MODEL_LANGUAGES.update(MODELS_SPECIAL)
+
+SUPPORTED_MODELS = sorted(list(MODEL_LANGUAGES.keys()))
 
 async def main() -> None:
     """Main entry point."""
@@ -104,7 +108,7 @@ async def main() -> None:
     )
     _LOGGER.debug(args)
 
-    onnx_asr_version = "0.7.0"
+    onnx_asr_version = "0.8.0"
 
     supported_languages = MODEL_LANGUAGES.get(args.model, DEFAULT_LANGUAGES)
 
@@ -174,4 +178,9 @@ if __name__ == "__main__":
     try:
         run()
     except KeyboardInterrupt:
-        pass
+        import os
+        import sys
+        _LOGGER.info("Interrupted by user, forcing exit...")
+        sys.stderr.flush()
+        sys.stdout.flush()
+        os._exit(0)
