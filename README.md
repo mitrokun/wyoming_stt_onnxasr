@@ -27,7 +27,7 @@ script/setup
 ```
 gigaam-v2-ctc
 gigaam-v2-rnnt
-gigaam-v3-ctc                 # это база, int8 - 220 мб, full - 865мб
+gigaam-v3-ctc                 # теперь это база, int8 - 220 мб, full - 865мб
 gigaam-v3-rnnt
 gigaam-v3-e2e-ctc             # e2e модели с пунктуацией
 gigaam-v3-e2e-rnnt
