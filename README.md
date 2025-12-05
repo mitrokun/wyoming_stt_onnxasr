@@ -33,6 +33,7 @@ gigaam-v3-e2e-ctc             # e2e модели с пунктуацией
 gigaam-v3-e2e-rnnt
 nemo-fastconformer-ru-ctc
 nemo-fastconformer-ru-rnnt
+nemo-canary-1b-v2
 nemo-parakeet-ctc-0.6b        # eng / int8 - 620мб
 nemo-parakeet-rnnt-0.6b       # eng
 nemo-parakeet-tdt-0.6b-v2     # eng
