@@ -32,6 +32,7 @@ class OnnxAsrEventHandler(AsyncEventHandler):
         self.model = model
         self.model_lock = model_lock
         self.audio_buffer: bytearray | None = None
+        self.language: str | None = None
         self.sample_rate = 16000
         self.sample_width = 2
         self.channels = 1
@@ -59,15 +60,25 @@ class OnnxAsrEventHandler(AsyncEventHandler):
             _LOGGER.debug("Audio stopped. Transcribing...")
             assert self.audio_buffer is not None
 
+            if not self.audio_buffer:
+                 await self.write_event(Transcript(text="").event())
+                 return True
+
             audio_s16 = np.frombuffer(self.audio_buffer, dtype=np.int16)
             audio_f32 = audio_s16.astype(np.float32) / 32768.0
 
+            recognize_kwargs = {"sample_rate": self.sample_rate}
+            if self.language:
+                recognize_kwargs["language"] = self.language
+
             async with self.model_lock:
-                transcription = self.model.recognize(audio_f32, sample_rate=self.sample_rate)
+                transcription = self.model.recognize(audio_f32, **recognize_kwargs)
 
             self.audio_buffer = None
+            self.language = None
 
-            _LOGGER.info(f"Transcription: {transcription}")
+            # Вывод результата только в DEBUG режиме
+            _LOGGER.debug(f"Transcription: {transcription}")
 
             await self.write_event(Transcript(text=transcription).event())
             _LOGGER.debug("Completed request")
@@ -75,6 +86,9 @@ class OnnxAsrEventHandler(AsyncEventHandler):
             return True
 
         if Transcribe.is_type(event.type):
+            transcribe = Transcribe.from_event(event)
+            if transcribe.language:
+                self.language = transcribe.language
             self.audio_buffer = None
             return True
 

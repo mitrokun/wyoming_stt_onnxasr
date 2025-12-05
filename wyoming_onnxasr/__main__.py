@@ -5,7 +5,6 @@ import logging
 from functools import partial
 
 import onnx_asr
-import numpy as np
 from wyoming.info import AsrModel, AsrProgram, Attribution, Info
 from wyoming.server import AsyncServer
 
@@ -22,6 +21,7 @@ WHISPER_LANGUAGES = [
 ]
 
 MODELS_RU = [
+    "t-tech/t-one",
     "gigaam-v2-ctc",
     "gigaam-v2-rnnt",
     "gigaam-v3-ctc",
@@ -48,11 +48,15 @@ MODELS_WHISPER = [
     "onnx-community/whisper-large-v3-turbo",
 ]
 
+# Языки для Canary и Parakeet v3
+MULTILINGUAL_LANGUAGES = [
+    "bg", "hr", "cs", "da", "nl", "en", "et", "fi", "fr", "de", "el", "hu",
+    "it", "lv", "lt", "mt", "pl", "pt", "ro", "sk", "sl", "es", "sv", "ru", "uk"
+]
+
 MODELS_SPECIAL = {
-    "nemo-parakeet-tdt-0.6b-v3": [
-        "bg", "hr", "cs", "da", "nl", "en", "et", "fi", "fr", "de", "el", "hu",
-        "it", "lv", "lt", "mt", "pl", "pt", "ro", "sk", "sl", "es", "sv", "ru", "uk"
-    ]
+    "nemo-parakeet-tdt-0.6b-v3": MULTILINGUAL_LANGUAGES,
+    "nemo-canary-1b-v2": MULTILINGUAL_LANGUAGES,
 }
 
 DEFAULT_LANGUAGES = ["ru", "en"]
@@ -108,7 +112,7 @@ async def main() -> None:
     )
     _LOGGER.debug(args)
 
-    onnx_asr_version = "0.8.0"
+    onnx_asr_version = "0.9.0"
 
     supported_languages = MODEL_LANGUAGES.get(args.model, DEFAULT_LANGUAGES)
 
