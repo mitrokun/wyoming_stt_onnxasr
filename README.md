@@ -31,20 +31,23 @@ gigaam-v3-ctc                 # теперь это база, int8 - 220 мб, f
 gigaam-v3-rnnt
 gigaam-v3-e2e-ctc             # e2e модели с пунктуацией
 gigaam-v3-e2e-rnnt
+alphacep/vosk-model-ru        # int8 - 70мб, full - 260мб, ещё быстрее но WER хуже
+alphacep/vosk-model-small-ru  # 25мб/90мб, в аддоне HA исользуется v0.22, здесь v0.54
 nemo-fastconformer-ru-ctc
 nemo-fastconformer-ru-rnnt
-nemo-canary-1b-v2
 nemo-parakeet-ctc-0.6b        # eng / int8 - 620мб
 nemo-parakeet-rnnt-0.6b       # eng
 nemo-parakeet-tdt-0.6b-v2     # eng
-nemo-parakeet-tdt-0.6b-v3     # may work inconsistently, as automatic language detection is used for each request
+nemo-parakeet-tdt-0.6b-v3     # multilingual / may work inconsistently, as automatic language detection is used for each request
+nemo-canary-1b-v2             # multilingual / int8 - 980мб; The transcription language is matched with the agent language.
+
 whisper-base                  # комплектные варианты шёпота не интересны, так как есть faster-whisper
-alphacep/vosk-model-ru        # int8 - 70мб, full - 260мб, ещё быстрее но WER хуже
-alphacep/vosk-model-small-ru  # 25мб/90мб, в аддоне HA исользуется v0.22, здесь v0.52
 onnx-community/whisper-tiny
 onnx-community/whisper-base
 onnx-community/whisper-small
 onnx-community/whisper-large-v3-turbo
 ```
+`parakeet-v3` и `canary-1b-v2` поддерживают следующие языки: `"bg", "hr", "cs", "da", "nl", "en", "et", "fi", "fr", "de", "el", "hu", "it", "lv", "lt", "mt", "pl", "pt", "ro", "sk", "sl", "es", "sv", "ru", "uk"`
+
 ### Aддон для HA (только cpu):
 [![Open your Home Assistant instance and show the add-on store for this repository.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=f4ba1342_onnxasr&repository_url=https%3A%2F%2Fgithub.com%2Fmitrokun%2Fvoice-addons)
