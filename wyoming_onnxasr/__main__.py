@@ -48,6 +48,11 @@ MODELS_WHISPER = [
     "onnx-community/whisper-large-v3-turbo",
 ]
 
+MODELS_GIGAAM_MULTILINGUAL = [
+    "istupakov/gigaam-multilingual-large-ctc-onnx",
+    "istupakov/gigaam-multilingual-ctc-onnx",
+]
+
 # Языки для Canary и Parakeet v3
 MULTILINGUAL_LANGUAGES = [
     "bg", "hr", "cs", "da", "nl", "en", "et", "fi", "fr", "de", "el", "hu",
@@ -70,6 +75,9 @@ for model in MODELS_EN:
 
 for model in MODELS_WHISPER:
     MODEL_LANGUAGES[model] = WHISPER_LANGUAGES
+
+for model in MODELS_GIGAAM_MULTILINGUAL:
+    MODEL_LANGUAGES[model] = DEFAULT_LANGUAGES
 
 MODEL_LANGUAGES.update(MODELS_SPECIAL)
 
@@ -112,7 +120,7 @@ async def main() -> None:
     )
     _LOGGER.debug(args)
 
-    onnx_asr_version = "0.9.0"
+    onnx_asr_version = "0.12.0"
 
     supported_languages = MODEL_LANGUAGES.get(args.model, DEFAULT_LANGUAGES)
 
