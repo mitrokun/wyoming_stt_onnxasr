@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+import subprocess
+import sys
+from pathlib import Path
+
+# Определяем пути
+_DIR = Path(__file__).parent
+_PROGRAM_DIR = _DIR.parent
+
+# Запускаем wyoming_onnxasr с указанными параметрами
+command = [
+    sys.executable,
+    "-m", "wyoming_onnxasr"
+]
+
+# Добавляем дополнительные аргументы, если переданы
+command += sys.argv[1:]
+
+try:
+    subprocess.check_call(command)
+except subprocess.CalledProcessError as e:
+    print(f"Error running wyoming_onnxasr: {e}")
+    exit(1)
