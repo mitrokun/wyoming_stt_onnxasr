@@ -1,0 +1,19 @@
+
+services:
+
+  wyoming-onnxasr:
+    container_name: wyoming-onnxasr
+    image: mitrokun/wyoming-onnxasr:latest
+    environment:
+      - TZ=Asia/Krasnoyarsk
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - onnxasr-models:/app/.cache/huggingface
+    restart: unless-stopped
+    ports:
+      - 10305:10305
+    privileged: false
+    command: ["--model", "gigaam-v3-ctc", "--uri", "tcp://0.0.0.0:10305"]
+
+volumes:
+  onnxasr-models:

@@ -51,3 +51,31 @@ onnx-community/whisper-large-v3-turbo
 
 ### Aддон для HA (только cpu):
 [![Open your Home Assistant instance and show the add-on store for this repository.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=f4ba1342_onnxasr&repository_url=https%3A%2F%2Fgithub.com%2Fmitrokun%2Fvoice-addons)
+
+### Запуск в Docker
+
+#### Локальная сборка образа
+Клонируйте репозиторий и выполните сборку образа из корневой директории проекта:
+```bash
+docker build -t mitrokun/wyoming-onnxasr:latest .
+```
+
+#### Управление через Docker Compose
+Запуск контейнера в фоновом режиме:
+```bash
+docker compose up -d
+```
+
+Просмотр логов работы сервера:
+```bash
+docker compose logs -f
+```
+
+Остановка и удаление контейнера (сохраненный том с моделью при этом не удаляется):
+```bash
+docker compose down
+```
+
+#### Особенности конфигурации и хранения моделей
+* **Параметры запуска:** Аргументы в блоке `command` (`--model` и `--uri`) являются обязательными. Остальные флаги (например, `--quantization int8`) опциональны и полностью совпадают с параметрами ручного запуска приложения.
+* **Кэширование моделей:** Выбранная модель загружается один раз при первом старте контейнера и сохраняется в именованном томе Docker, поэтому при последующих перезапусках повторное скачивание не требуется. При необходимости в файле `docker-compose.yml` вместо именованного тома можно примонтировать собственную директорию с хоста (например, `/path/to/local/folder:/app/.cache/huggingface`).
